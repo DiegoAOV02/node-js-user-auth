@@ -11,19 +11,15 @@ const User = Schema('User', {
 })
 
 export class UserRepository {
-  static create ({ username, password }) {
-    // 1. Validaciones del username (opcional: usar zod)
-    if (typeof username !== 'string') throw new Error('username must be a string')
-    if (username.length < 3) throw new Error('username must be at least 3 characters long')
-    // 2. Validaciones del password (opcional: usar zod)
-    if (typeof password !== 'string') throw new Error('password must be a string')
-    if (password.length < 8) throw new Error('password must be at least 8 characters long')
-    // 3. Asegurarse de que el username no exista
+  static async create ({ username, password }) {
+    Validation.username(username)
+    Validation.password(password)
+
     const user = User.findOne({ username })
     if (user) throw new Error('username already exists')
 
     const id = crypto.randomUUID()
-    const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS)
+    const hashedPassword = await bcrypt.hashSync(password, SALT_ROUNDS) // hashSync -> bloquea el thread principal
 
     User.create({
       _id: id,
@@ -34,5 +30,20 @@ export class UserRepository {
     return id
   }
 
-  static login ({ username, password }) {}
+  static login ({ username, password }) {
+    Validation.username(username)
+    Validation.password(password)
+  }
+}
+
+class Validation {
+  static username (username) {
+    if (typeof username !== 'string') throw new Error('username must be a string')
+    if (username.length < 3) throw new Error('username must be at least 3 characters long')
+  }
+
+  static password (password) {
+    if (typeof password !== 'string') throw new Error('password must be a string')
+    if (password.length < 8) throw new Error('password must be at least 8 characters long')
+  }
 }
