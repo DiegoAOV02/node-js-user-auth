@@ -15,3 +15,13 @@ Intalación de standard (para verificar el estilo de código | -D para instalarl
 ```bash
 npm install standard -D
 ```
+
+Instalación de dependencia para una base de datos en local:
+```bash
+npm install db-local
+```
+
+Instalación de dependencia para codificar las contraseñas:
+```bash
+npm install bcrypt
+```
