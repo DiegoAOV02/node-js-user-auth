@@ -25,3 +25,8 @@ Instalación de dependencia para codificar las contraseñas:
 ```bash
 npm install bcrypt
 ```
+
+Instalación de dependecia EJS:
+```bash
+npm install ejs
+```

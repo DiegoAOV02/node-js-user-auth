@@ -30,9 +30,19 @@ export class UserRepository {
     return id
   }
 
-  static login ({ username, password }) {
+  static async login ({ username, password }) {
     Validation.username(username)
     Validation.password(password)
+
+    const user = User.findOne({ username })
+    if (!user) throw new Error('username does not exist')
+
+    const isValid = await bcrypt.compareSync(password, user.password)
+    if (!isValid) throw new Error('password is incorrect')
+
+    const { password: _, ...publicUser } = user
+
+    return publicUser
   }
 }
 
