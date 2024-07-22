@@ -1,4 +1,4 @@
-# Autenticación de usuarios, sesiones, cookies y JWT con Node.js y Express.js
+# Autenticación de usuarios, sesiones, cookies y JWT con Node.js
 
 En este proyecto se muestra cómo autenticar usuarios en una aplicación web utilizando sesiones, cookies y JWT (JSON Web Tokens) con Node.js y Express.js.
 
