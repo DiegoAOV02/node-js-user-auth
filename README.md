@@ -30,3 +30,13 @@ Instalación de dependecia EJS:
 ```bash
 npm install ejs
 ```
+
+Instalación de JWT
+```bash
+npm install jsonwebtoken
+```
+
+Instalacion de cookie-parser
+```bash
+npm install cookie-parser
+```

@@ -73,8 +73,8 @@
     }
   </style>
 </head>
+
 <body>
-  
   <div class="container">
     <% if (typeof username !=='undefined' ) { %>
       <div class="form-container">
@@ -84,7 +84,7 @@
       </div>
       <% } %>
 
-        <% if (typeof username !=='undefined' ) { %>
+        <% if (typeof username ==='undefined' ) { %>
           <div class="form-container">
             <form id="login-form">
               <h2>Login</h2>
@@ -116,7 +116,7 @@
             </form>
           </div>
         <% } %>
-  </div>
+    </div>
 
   <script>
     const $ = el => document.querySelector(el)
