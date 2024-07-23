@@ -1,42 +1,52 @@
-# Autenticación de usuarios, sesiones, cookies y JWT con Node.js
+# User authentication using sessions, cookies and JWT with Node.js and Express.js
 
-En este proyecto se muestra cómo autenticar usuarios en una aplicación web utilizando sesiones, cookies y JWT (JSON Web Tokens) con Node.js y Express.js.
+This projects tries to show how to implement user authentication using sessions, cookies and JWT by using good practices and security measures.
 
-### Instalación de dependencias
+## Features
 
-Instalación de Express.js:
+- User authentication by using sessions, cookies and JWT
+- User login
+- User registration
+- JWT-based authentication
+- Protected routes
+- Cookies-based authentication
 
+## Dependencies installed
+
+This are all the dependencies installed in this project:
 ```bash
+# 1. Express instalation
 npm install express
-```
 
-Intalación de standard (para verificar el estilo de código | -D para instalarlo como dependendia de desarrollo):
-
-```bash
+# 2. Standard instalation to check code style (optional)
 npm install standard -D
-```
 
-Instalación de dependencia para una base de datos en local:
-```bash
+# 2.1 Standard configuration in package.json
+"eslintConfig": {
+  "extends": "standard"
+}
+
+# 3. Local Database instalation
 npm install db-local
-```
 
-Instalación de dependencia para codificar las contraseñas:
-```bash
+# 4. Bcrypt to hash passwords
 npm install bcrypt
-```
 
-Instalación de dependecia EJS:
-```bash
+# 5. EJS dependency instalation
 npm install ejs
-```
 
-Instalación de JWT
-```bash
+# 6. JWT instalation
 npm install jsonwebtoken
+
+# 7. Cookie-parser instalation
+npm install cookie-parser
+
 ```
 
-Instalacion de cookie-parser
-```bash
-npm install cookie-parser
-```
+## Endpoints
+
+- **GET /**: Home page
+- **POST /login**: Login page to authenticate users by using JWT and HTTP-only cookies
+- **POST /register**: Register page to create new users in the database
+- **POST /logout**: Logout page to remove the session and the cookie
+- **GET /protected**: Protected route that requires authentication to access it (JWT and cookies)
