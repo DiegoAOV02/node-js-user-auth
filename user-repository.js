@@ -19,7 +19,7 @@ export class UserRepository {
     if (user) throw new Error('username already exists')
 
     const id = crypto.randomUUID()
-    const hashedPassword = await bcrypt.hashSync(password, SALT_ROUNDS) // hashSync -> bloquea el thread principal
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
 
     User.create({
       _id: id,

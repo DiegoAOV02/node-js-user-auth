@@ -1,36 +1,35 @@
-import express from 'express'
-import jwt from 'jsonwebtoken'
-import cookieParser from 'cookie-parser'
-import { PORT, SECRET_JWT_KEY } from './config.js'
-import { UserRepository } from './user-repository.js'
+import express from 'express' // express para crear el servidor
+import jwt from 'jsonwebtoken' // para los tokens de autenticación
+import cookieParser from 'cookie-parser' // parsear las cookies
+import { PORT, SECRET_JWT_KEY } from './config.js' // importo el puerto y la clave secreta del archivo de configuración
+import { UserRepository } from './user-repository.js' // importo el repositorio de usuarios
 
-const app = express()
+const app = express() // Crear la aplicación de express
 
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs') // Configurar el motor de plantillas ejs
 
 app.use(express.json()) // Middleware para parsear el body de las requests
 app.use(cookieParser()) // Middleware para parsear las cookies
 
-app.use((req, res, next) => {
-  const token = req.cookies.access_token
-  let data = null
-
-  req.session = { user: null }
+app.use((req, res, next) => { // Middleware para verificar el token de autenticación
+  const token = req.cookies.access_token // -> obtener la cookie de acceso
+  req.session = { user: null } // -> inicializar la sesión donde el usuario es null para no estar autenticado
 
   try {
-    data = jwt.verify(token, SECRET_JWT_KEY)
-    req.session.user = data
-  } catch {}
+    const data = jwt.verify(token, SECRET_JWT_KEY) // -> verificar el token con la clave secreta
+    req.session.user = data // -> guardar los datos del usuario en la sesión si el token es válido
+  } catch (error) {
+    req.session.user = null // -> si el token no es válido, el usuario no está autenticado
+  }
 
   next() // -> seguir a la siguiente ruta o middleware
 })
 
 app.get('/', (req, res) => {
-  const { user } = req.session
+  const { user } = req.session // -> obtener el usuario de la sesión
   res.render('index', user)
 })
 
-// Endpoints a desarrollar.
 app.post('/login', async (req, res) => {
   const { username, password } = req.body
 
@@ -56,7 +55,7 @@ app.post('/login', async (req, res) => {
 
 app.post('/register', async (req, res) => {
   const { username, password } = req.body
-  console.log(req.body)
+  console.log({ username, password })
 
   try {
     const id = await UserRepository.create({ username, password })

@@ -122,7 +122,7 @@
     const $ = el => document.querySelector(el)
 
     const loginForm = $('#login-form')
-    const loginSpan = $('lo#login-form span')
+    const loginSpan = $('#login-form span')
 
     const registerForm = $('#register-form')
     const registerSpan = $('#register-form span')
@@ -131,24 +131,24 @@
 
     loginForm?.addEventListener('submit', e => {
       e.preventDefault()
-      const username = $('#login-username').value
-      const password = $('#login-password').value
+      const username = $('#login-username').value // extrae el valor del input con id login-username
+      const password = $('#login-password').value // extrae el valor del input con id login-password
 
-      fetch('/login', {
+      fetch('/login', { // envía una petición POST a la ruta /login
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json' // indica que el cuerpo de la petición es JSON
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }) // convierte los datos a JSON
       })
-        .then(res => {
-          if (res.ok) {
+        .then(res => { // cuando la petición responda
+          if (res.ok) { 
             loginSpan.innerText = 'Sesión iniciada... Entrando...'
             loginSpan.style.color = 'green'
             setTimeout(() => {
-              window.location.href = '/protected'
+              window.location.href = '/protected' // redirecciona al usuario a la ruta /protected cuando esté todo correcto
             }, 2000)
-          } else {
+          } else { // de lo contrario aparece este error
             loginSpan.innerText = 'Error al iniciar sesión'
             loginSpan.style.color = 'red'
           }
