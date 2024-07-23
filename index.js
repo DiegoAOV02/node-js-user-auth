@@ -1,6 +1,7 @@
 import express from 'express' // express para crear el servidor
 import jwt from 'jsonwebtoken' // para los tokens de autenticación
 import cookieParser from 'cookie-parser' // parsear las cookies
+
 import { PORT, SECRET_JWT_KEY } from './config.js' // importo el puerto y la clave secreta del archivo de configuración
 import { UserRepository } from './user-repository.js' // importo el repositorio de usuarios
 
