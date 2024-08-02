@@ -119,7 +119,7 @@
     </div>
 
   <script>
-    const $ = el => document.querySelector(el)
+    const $ = el => document.querySelector(el) // función para seleccionar elementos del DOM
 
     const loginForm = $('#login-form')
     const loginSpan = $('#login-form span')
@@ -130,7 +130,7 @@
     const logoutButton = $('#close-session')
 
     loginForm?.addEventListener('submit', e => {
-      e.preventDefault()
+      e.preventDefault() // evita que el formulario se envíe
       const username = $('#login-username').value // extrae el valor del input con id login-username
       const password = $('#login-password').value // extrae el valor del input con id login-password
 
